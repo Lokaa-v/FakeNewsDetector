@@ -28,10 +28,10 @@ An **AI-powered Fake News Detection System** designed to classify news articles 
 
 > Add screenshots of your project here 👇  
 
-![Homepage](assets/homepage.png)  
+![Homepage](page.png)  
 *Fake News Detector – Homepage*  
 
-![Prediction Result](assets/result.png)  
+![Prediction Result](result.png)  
 *Prediction Result with Confidence Score*  
 
 ---
