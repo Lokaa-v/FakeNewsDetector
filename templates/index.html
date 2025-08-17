@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>📰 Fake News Detector</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #085e40, #347668);
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 30px;
+      text-shadow: 2px 2px 5px #000;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    form {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 30px 40px;
+      border-radius: 20px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(5px);
+      animation: slideIn 0.7s ease-in-out;
+    }
+
+    textarea {
+      width: 400px;
+      height: 150px;
+      padding: 15px;
+      font-size: 16px;
+      border: none;
+      border-radius: 10px;
+      resize: none;
+      margin-bottom: 20px;
+      font-family: 'Courier New', Courier, monospace;
+    }
+
+    button {
+      padding: 12px 25px;
+      font-size: 16px;
+      font-weight: bold;
+      background-color: #00c896;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      color: #ffffff;
+      transition: 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #00a87e;
+      transform: scale(1.05);
+    }
+
+    .result {
+      margin-top: 20px;
+      font-size: 1.5rem;
+      font-weight: bold;
+      padding: 10px 20px;
+      border-radius: 10px;
+      background-color: rgba(0, 0, 0, 0.3);
+      animation: fadeIn 0.5s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+  <h1>📰 Fake News Detector</h1>
+  <form action="/predict" method="POST">
+    <textarea name="news" placeholder="Paste a news article or headline..."></textarea><br>
+    <button type="submit">Check</button>
+  </form>
+
+  <form action="/predict_url" method="POST" style="margin-top: 20px;">
+  <input type="text" name="url" placeholder="Paste news article URL here..." style="width: 400px; padding: 10px; border-radius: 8px; border: none; font-size: 16px;" required>
+  <button type="submit" style="margin-left: 10px;">Check URL</button>
+</form>
+
+<form action="/predict_file" method="POST" enctype="multipart/form-data" style="margin-top: 20px;">
+  <input type="file" name="newsfile" accept=".txt" required>
+  <button type="submit">Upload & Check</button>
+</form>
+
+
+  {% if prediction %}
+    <div class="result">
+      {{ prediction }}
+    </div>
+    {% if confidence %}
+  <div class="result">
+    Confidence: {{ confidence }}%
+  </div>
+  {% endif %}
+{% endif %}
+
+</body>
+</html>
